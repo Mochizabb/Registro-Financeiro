@@ -6,10 +6,10 @@
     <title>Registro Financeiro</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body onload="createChart()">
     <header><h1>Welcome to Registro Financeiro</h1></header>
     <div class="content">
-        <div id="movimento">
+        <div class="movimento">
             <h2>Movimento</h2>
             <form>
                 <label for="descricao">Descrição</label>
@@ -22,7 +22,7 @@
                 <button type="reset">Limpar</button>
             </form>
         </div>
-        <div id="grafico"><canvas id="acquisitions"></canvas></div>
+        <div class="grafico"><canvas id="graph"></canvas></div>
     </div>
     <footer><p>&copy; 2025 Registro Financeiro</p></footer>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

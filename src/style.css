@@ -43,27 +43,27 @@ header {
 }
 
 .movimento, .grafico {
-    width: 80%;
+    width: 70%;
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
-    background-color: #007a33;
+    background-color: #4e6b5a;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-#movimento {
-    width: 500px;
-    height: 100%;
+.movimento {
+    width: 100%;
+    height: 90%;
     justify-content: space-around;
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
-#grafico {
+.grafico {
     width: 100%;
-    height: 100%;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
