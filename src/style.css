@@ -1,0 +1,85 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #005c26;
+  color: #f2f2f2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+header {
+    width: 100%;
+    position: fixed;
+    background-color: #004d22;
+    padding: 20px 0;
+    text-align: center;
+    z-index: 1;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-bottom: 2px solid #003d1a;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 0 0 10px 10px;
+    box-sizing: border-box;
+    color: #f2f2f2;
+    font-size: 1.5em;
+    font-weight: bold;
+    top: 0;
+    left: 0;
+}
+
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    height: calc(100vh - 80px);
+    padding: 20px;
+    box-sizing: border-box;
+    height: 65%;
+}
+
+.movimento, .grafico {
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #007a33;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#movimento {
+    width: 500px;
+    height: 100%;
+    justify-content: space-around;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+#grafico {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #f2f2f2;
+}
+
+
+
+footer {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px 0;
+    text-align: center;
+    background-color: #004d22;
+    color: #f2f2f2;
+    font-size: 1em;
+    position: fixed;
+}
