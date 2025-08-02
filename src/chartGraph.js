@@ -21,12 +21,15 @@ function createChart(data){
     new Chart(ctx, {
     type: 'bar',
     data: {
-    labels: data.map(row => row.data) ,
-      datasets: [{
-        label: 'Valor',
-        data:   data.map(row => row.valor),
-        borderWidth: 1
-      }]
+    labels: data.map(row => row.data), // Descrições como labels
+    datasets: [{
+      label: 'Valores das Transações',
+      data: data.map(row => row.valor),     // Todos os valores
+      borderWidth: 1,
+      backgroundColor: 'rgba(0, 255, 64, 0.5)'
+    }]
+
+      
     },
     options: {
       scales: {
@@ -34,10 +37,13 @@ function createChart(data){
           beginAtZero: true
         }
       },
-      maintainAspectRatio: false
+      maintainAspectRatio: false,
+       plugins: {
+            title: {
+                display: true,
+                text: 'Grafico de Gastos'
+            }
+          }
     }
   });
 }
-
-
-setTimeout(createChart, 3000);
