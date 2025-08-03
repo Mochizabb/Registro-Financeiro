@@ -13,7 +13,6 @@
   })
 
   .then(function(data){
-    console.log(data)
     createChart(data)
   })
 

@@ -11,10 +11,17 @@ body {
   height: 100vh;
 }
 
-header {
+header, footer {
     width: 100%;
     position: fixed;
+    left: 0;
     background-color: #004d22;
+    color: #f2f2f2;
+    box-sizing: border-box;
+}
+
+header {
+    top: 0;
     padding: 20px 0;
     text-align: center;
     z-index: 1;
@@ -23,63 +30,217 @@ header {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border-radius: 0 0 10px 10px;
-    box-sizing: border-box;
-    color: #f2f2f2;
     font-size: 1.5em;
     font-weight: bold;
-    top: 0;
-    left: 0;
+}
+
+footer {
+    bottom: 0;
+    right: 0;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 1em;
 }
 
 .content {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     width: 100%;
-    height: calc(100vh - 80px);
-    padding: 20px;
-    box-sizing: border-box;
     height: 65%;
+    padding: 60px;
+    box-sizing: border-box;
+    gap: 20px;
 }
 
-.movimento, .grafico {
-    width: 70%;
+.movimento, .grafico, .historico {
     max-width: 800px;
     margin: 20px auto;
     padding: 20px;
     background-color: #4e6b5a;
     border-radius: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #f2f2f2;
 }
 
-.movimento {
-    width: 100%;
+.movimento, .historico {
+    width: 30%;
     height: 90%;
-    justify-content: space-around;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 
+.movimento {
+    justify-content: space-around;
+}
+
 .grafico {
-    width: 100%;
+    width: 40%;
     height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #f2f2f2;
 }
 
+#transacaoForm {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 1.5rem;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+}
 
-
-footer {
-    bottom: 0;
-    left: 0;
-    right: 0;
-    padding: 10px 0;
-    text-align: center;
-    background-color: #004d22;
+#transacaoForm label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
     color: #f2f2f2;
-    font-size: 1em;
-    position: fixed;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+#transacaoForm input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1.5rem;
+    border: 2px solid rgba(242, 242, 242, 0.2);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: rgba(242, 242, 242, 0.1);
+    color: #f2f2f2;
+    box-sizing: border-box;
+}
+
+#transacaoForm input:focus {
+    outline: none;
+    border-color: #f2f2f2;
+    background-color: rgba(242, 242, 242, 0.15);
+    box-shadow: 0 0 0 3px rgba(242, 242, 242, 0.1);
+    transform: translateY(-1px);
+}
+
+#transacaoForm input:hover {
+    border-color: rgba(242, 242, 242, 0.4);
+    background-color: rgba(242, 242, 242, 0.15);
+}
+
+.button-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 1.5rem; /* Adicionado espaçamento inferior */
+}
+
+#transacaoForm button {
+    flex: 1;
+    padding: 0.875rem 1rem;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Botão Entrada (verde) */
+#transacaoForm button.entrada {
+    background: linear-gradient(135deg, #005c26 0%, #162c1f 100%);
+}
+
+#transacaoForm button.entrada:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 92, 38, 0.3);
+}
+
+/* Botão Saída (vermelho) */
+#transacaoForm button.saida {
+    background: linear-gradient(135deg, #c0392b 0%, #66241d 100%);
+}
+
+#transacaoForm button.saida:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(192, 57, 43, 0.3);
+}
+
+#transacaoForm button:active {
+    transform: translateY(-1px);
+}
+
+#transacaoForm button:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+#transacaoForm button:hover:before {
+    left: 100%;
+}
+
+/* Estilo para validação */
+#transacaoForm input:invalid {
+    border-color: #ff6b6b;
+}
+
+#transacaoForm input:valid {
+    border-color: rgba(242, 242, 242, 0.4);
+}
+
+/* Placeholder styling */
+#transacaoForm input::placeholder {
+    color: rgba(242, 242, 242, 0.6);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .content {
+        flex-direction: column;
+        height: auto;
+        padding: 20px;
+    }
+    
+    .movimento, .grafico, .historico {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+    
+    #transacaoForm {
+        padding: 1rem;
+    }
+    
+    #transacaoForm input {
+        padding: 0.75rem;
+    }
+    
+    .button-container {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    #transacaoForm button {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
 }
