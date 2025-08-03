@@ -13,20 +13,43 @@
   })
 
   .then(function(data){
-    createChart(data)
+    createChart(agruparDados(data))
   })
 
+// agrupar os dados em uma unica barra do grafico
+function agruparDados(data){
+  const agrupados = {}
+  data.forEach(row => {
+    if (!agrupados[row.data]){
+      agrupados[row.data] = { entradas: 0, saidas: 0}
+    }
+    agrupados[row.data].entradas += Number(row.entradas) || 0
+    agrupados[row.data].saidas += Number(row.saidas) || 0
+  })
+  return Object.entries(agrupados).map(([data, valores]) => ({
+    data,
+    entradas: valores.entradas,
+    saidas: valores.saidas
+  }))
+}
+  
 function createChart(data){
     new Chart(ctx, {
     type: 'bar',
     data: {
     labels: data.map(row => row.data), // Descrições como labels
-    datasets: [{
-      label: 'Valores das Transações',
-      data: data.map(row => row.valor),     // Todos os valores
-      borderWidth: 1,
-      backgroundColor: 'rgba(0, 255, 64, 0.5)'
-    }]
+    datasets: [
+  {
+    label: 'Entradas',
+    data: data.map(row => row.entradas),
+    backgroundColor: 'rgba(0, 255, 64, 0.7)', // Verde
+  },
+  {
+    label: 'Saídas', 
+    data: data.map(row => row.saidas),
+    backgroundColor: 'rgba(255, 64, 64, 0.7)', // Vermelho
+  }
+]
 
       
     },

@@ -7,7 +7,8 @@ db.serialize(() => {
     CREATE TABLE IF NOT EXISTS transacoes (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       descricao TEXT NOT NULL,
-      valor REAL NOT NULL,
+      entradas REAL,
+      saidas REAL,
       data TEXT NOT NULL
     )
   `, (err) => {

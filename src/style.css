@@ -1,246 +1,384 @@
-body {
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #005c26;
-  color: #f2f2f2;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(135deg, #0a4d2a 0%, #1a5f3f 50%, #005c26 100%);
+  color: #f8fafc;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Header com glassmorphismo */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1.5rem 0;
+  background: rgba(0, 77, 34, 0.85);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #ffffff 0%, #a7f3d0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.02em;
+}
+
+/* Container principal */
+.content {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.5fr;
+  gap: 2rem;
+  padding: 6rem 2rem 2rem;
+  min-height: calc(100vh - 4rem);
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Cards base com glassmorphismo */
+.movimento, .grafico, .historico {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.movimento::before, .grafico::before, .historico::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #10b981, #34d399, #6ee7b7);
+  border-radius: 24px 24px 0 0;
+}
+
+.movimento:hover, .grafico:hover, .historico:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 32px 64px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Títulos dos cards */
+.movimento h2, .grafico h2, .historico h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #f1f5f9;
+  position: relative;
+}
+
+.movimento h2::after, .historico h2::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 3px;
+  background: linear-gradient(90deg, #10b981, #34d399);
+  border-radius: 2px;
+}
+
+/* Formulário moderno */
+#transacaoForm {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 1.5rem;
+  height: 100%;
   justify-content: center;
-  height: 100vh;
-}
-
-header, footer {
-    width: 100%;
-    position: fixed;
-    left: 0;
-    background-color: #004d22;
-    color: #f2f2f2;
-    box-sizing: border-box;
-}
-
-header {
-    top: 0;
-    padding: 20px 0;
-    text-align: center;
-    z-index: 1;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    border-bottom: 2px solid #003d1a;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-radius: 0 0 10px 10px;
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-footer {
-    bottom: 0;
-    right: 0;
-    padding: 10px 0;
-    text-align: center;
-    font-size: 1em;
-}
-
-.content {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 100%;
-    height: 65%;
-    padding: 60px;
-    box-sizing: border-box;
-    gap: 20px;
-}
-
-.movimento, .grafico, .historico {
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #4e6b5a;
-    border-radius: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    color: #f2f2f2;
-}
-
-.movimento, .historico {
-    width: 30%;
-    height: 90%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.movimento {
-    justify-content: space-around;
-}
-
-.grafico {
-    width: 40%;
-    height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-#transacaoForm {
-    width: 100%;
-    max-width: none;
-    margin: 0;
-    padding: 1.5rem;
-    background: transparent;
-    border-radius: 0;
-    box-shadow: none;
-    border: none;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: center;
 }
 
 #transacaoForm label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: #f2f2f2;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
 }
 
 #transacaoForm input {
-    width: 100%;
-    padding: 0.75rem 1rem;
-    margin-bottom: 1.5rem;
-    border: 2px solid rgba(242, 242, 242, 0.2);
-    border-radius: 8px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    background-color: rgba(242, 242, 242, 0.1);
-    color: #f2f2f2;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 1rem 1.25rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  color: #f8fafc;
+  font-size: 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
 }
 
 #transacaoForm input:focus {
-    outline: none;
-    border-color: #f2f2f2;
-    background-color: rgba(242, 242, 242, 0.15);
-    box-shadow: 0 0 0 3px rgba(242, 242, 242, 0.1);
-    transform: translateY(-1px);
+  outline: none;
+  border-color: #10b981;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 
+    0 0 0 4px rgba(16, 185, 129, 0.15),
+    0 8px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
 
-#transacaoForm input:hover {
-    border-color: rgba(242, 242, 242, 0.4);
-    background-color: rgba(242, 242, 242, 0.15);
+#transacaoForm input::placeholder {
+  color: rgba(203, 213, 225, 0.6);
 }
 
+/* Botões com micro-interações */
 .button-container {
-    display: flex;
-    gap: 1rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem; /* Adicionado espaçamento inferior */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
 }
 
 #transacaoForm button {
-    flex: 1;
-    padding: 0.875rem 1rem;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    position: relative;
-    overflow: hidden;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 16px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Botão Entrada (verde) */
 #transacaoForm button.entrada {
-    background: linear-gradient(135deg, #005c26 0%, #162c1f 100%);
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
 }
 
 #transacaoForm button.entrada:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 92, 38, 0.3);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(16, 185, 129, 0.3);
 }
 
-/* Botão Saída (vermelho) */
 #transacaoForm button.saida {
-    background: linear-gradient(135deg, #c0392b 0%, #66241d 100%);
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
 }
 
 #transacaoForm button.saida:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(192, 57, 43, 0.3);
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(239, 68, 68, 0.3);
 }
 
 #transacaoForm button:active {
-    transform: translateY(-1px);
+  transform: translateY(-1px);
 }
 
-#transacaoForm button:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
+/* Área do gráfico */
+.grafico {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
-#transacaoForm button:hover:before {
-    left: 100%;
+#graph {
+  max-width: 100%;
+  max-height: 100%;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.1));
 }
 
-/* Estilo para validação */
-#transacaoForm input:invalid {
-    border-color: #ff6b6b;
+/* Histórico com tabela moderna */
+.historico {
+  display: flex;
+  flex-direction: column;
 }
 
-#transacaoForm input:valid {
-    border-color: rgba(242, 242, 242, 0.4);
+/* Histórico com tabela moderna */
+.historico {
+  display: flex;
+  flex-direction: column;
 }
 
-/* Placeholder styling */
-#transacaoForm input::placeholder {
-    color: rgba(242, 242, 242, 0.6);
+#historicoTable {
+  flex: 1;
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: transparent;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Responsivo */
+#historicoTable thead {
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  flex-shrink: 0;
+}
+
+#historicoTable thead tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+#historicoTable thead th {
+  display: table-cell;
+  padding: 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  vertical-align: middle;
+  text-align: center;
+}
+
+#historicoTable tbody {
+  flex: 1;
+  display: block;
+  overflow-y: auto;
+  max-height: calc(60vh);
+}
+
+#historicoTable tbody tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  transition: background-color 0.2s ease;
+}
+
+#historicoTable tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+#historicoTable tbody td {
+  display: table-cell;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  text-align: center;
+  color: #e2e8f0;
+  vertical-align: middle;
+}
+
+/* Scrollbar estilizada apenas no tbody */
+#historicoTable tbody::-webkit-scrollbar {
+  width: 6px;
+}
+
+#historicoTable tbody::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+}
+
+#historicoTable tbody::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+}
+
+#historicoTable tbody::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Removido - scrollbar agora está no container */
+
+/* Footer */
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  padding: 1rem 0;
+  background: rgba(0, 77, 34, 0.85);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  text-align: center;
+  font-size: 0.875rem;
+  color: #94a3b8;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 6rem 1rem 2rem;
+  }
+  
+  .movimento, .grafico, .historico {
+    min-height: 400px;
+  }
+  
+  .button-container {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
-    .content {
-        flex-direction: column;
-        height: auto;
-        padding: 20px;
-    }
-    
-    .movimento, .grafico, .historico {
-        width: 100%;
-        height: auto;
-        margin-bottom: 20px;
-    }
-    
-    #transacaoForm {
-        padding: 1rem;
-    }
-    
-    #transacaoForm input {
-        padding: 0.75rem;
-    }
-    
-    .button-container {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-    
-    #transacaoForm button {
-        padding: 0.75rem;
-        font-size: 0.85rem;
-    }
+  header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .movimento, .grafico, .historico {
+    padding: 1.5rem;
+    border-radius: 16px;
+  }
+  
+  #historicoTable tbody {
+    max-height: 300px;
+  }
+}
+
+/* Animações suaves */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.movimento, .grafico, .historico {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+.movimento {
+  animation-delay: 0.1s;
+}
+
+.grafico {
+  animation-delay: 0.2s;
+}
+
+.historico {
+  animation-delay: 0.3s;
 }
