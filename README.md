@@ -2,6 +2,8 @@
 
 Um sistema simples e eficiente para controle de transações financeiras com operações CRUD completas.
 
+![Imagens](https://github.com/Mochizabb/Registro-Financeiro/blob/main/image.png)
+
 ![Dashboard](https://img.shields.io/badge/Status-Funcionando-brightgreen)
 ![Versão](https://img.shields.io/badge/Versão-1.0.0-blue)
 ![Licença](https://img.shields.io/badge/Licença-MIT-yellow)
