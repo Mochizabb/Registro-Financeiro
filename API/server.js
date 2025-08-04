@@ -23,21 +23,82 @@ app.get('/api/data', (req, res) => {
     })
 })
 
+// Delete de dado unico
 app.delete('/api/data', (req, res) => {
     const db = new sqlite3.Database('database/data.db');
+    const { data, descricao, entradas, saidas } = req.body
     
     db.run(`DELETE FROM transacoes 
-            WHERE data = '2024-01-01' 
-            AND descricao = 'Salário Janeiro' 
-            AND entradas = 3500.00`, function(err) {
-      if (err) {
-        console.error('Erro ao apagar transação:', err.message);
-      } else {
-        return ('Transação apagada com sucesso.');
-      }
-      db.close();
-    });
+            WHERE (data, descricao, entradas, saidas) = (?,?,?,?)`,
+            [ data, descricao, entradas, saidas],
+            function (err) {
+            if (err) {
+                return res.status(500).json({ error: err.message })
+            }
+            res.status(200).json({ 
+                descricao, 
+                entradas,
+                saidas, 
+                data 
+            })
+        }
+    );
 })
+
+//editar dados
+app.put('/api/data', (req, res) => {
+    const { filtro, novos_dados } = req.body;
+    
+    // Validar se tem filtro e novos dados
+    if (!filtro || !novos_dados) {
+        return res.status(400).json({ error: 'Filtro e novos_dados são obrigatórios' });
+    }
+    
+    const sql = `
+        UPDATE transacoes 
+        SET 
+            descricao = ?,
+            entradas = ?,
+            saidas = ?,
+            data = ?
+        WHERE 
+            descricao = ? AND 
+            entradas = ? AND 
+            saidas = ? AND 
+            data = ?
+    `;
+    
+    const params = [
+        // SET (novos dados)
+        novos_dados.descricao,
+        novos_dados.entradas,
+        novos_dados.saidas,
+        novos_dados.data,
+        // WHERE (filtro - dados originais)
+        filtro.descricao,
+        filtro.entradas,
+        filtro.saidas,
+        filtro.data
+    ];
+    
+    db.run(sql, params, function(err) {
+        if (err) {
+            console.error('Erro no UPDATE:', err);
+            return res.status(500).json({ error: 'Erro interno do servidor' });
+        }
+        
+        // Verificar se alguma linha foi afetada
+        if (this.changes === 0) {
+            return res.status(404).json({ error: 'Transação não encontrada' });
+        }
+        
+        res.json({ 
+            message: 'Transação atualizada com sucesso',
+            changes: this.changes,
+            dados_atualizados: novos_dados
+        });
+    });
+});
 
 // Envio de informações para o banco
 app.post('/api/data', async(req, res) => {

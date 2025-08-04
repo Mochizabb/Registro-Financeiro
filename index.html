@@ -38,12 +38,24 @@
                         <th>Entrou</th>
                         <th>Saiu</th>
                         <th>Data</th>
+                         <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <!-- As transações serão adicionadas aqui dinamicamente -->
                 </tbody>
             </table>
+        </div>
+    </div>
+    <!-- Modal de confirmação -->
+    <div id="confirmModal" class="modal">
+        <div class="modal-content">
+            <h3>🗑️ Confirmar Exclusão</h3>
+            <p id="modalMessage"></p>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel" onclick="closeModal()">Cancelar</button>
+                <button class="modal-btn confirm" onclick="confirmDelete()">Deletar</button>
+            </div>
         </div>
     </div>
     <footer><p>&copy; 2025 Registro Financeiro</p></footer>
